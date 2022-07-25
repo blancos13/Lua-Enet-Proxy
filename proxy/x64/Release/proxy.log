@@ -1,0 +1,133 @@
+﻿  events.cpp
+C:\Users\Altanb\Desktop\proxy\proxy\proton\variant.hpp(322,1): warning C4267: '=': 'size_t' - 'int' dönüşümü; veri kaybı olabilir
+C:\Users\Altanb\Desktop\proxy\proxy\proton\variant.hpp(339,1): warning C4267: '=': 'size_t' - 'int' dönüşümü; veri kaybı olabilir
+C:\Users\Altanb\Desktop\proxy\proxy\proton\variant.hpp(355,1): warning C4267: 'başlatılıyor': 'size_t' - 'uint32_t' dönüşümü; veri kaybı olabilir
+C:\Users\Altanb\Desktop\proxy\proxy\events.cpp(436,21): warning C4244: 'başlatılıyor': 'float' - 'int' dönüşümü; veri kaybı olabilir
+C:\Users\Altanb\Desktop\proxy\proxy\events.cpp(437,21): warning C4244: 'başlatılıyor': 'float' - 'int' dönüşümü; veri kaybı olabilir
+C:\Users\Altanb\Desktop\proxy\proxy\events.cpp(455,21): warning C4244: 'başlatılıyor': 'float' - 'int' dönüşümü; veri kaybı olabilir
+C:\Users\Altanb\Desktop\proxy\proxy\events.cpp(456,21): warning C4244: 'başlatılıyor': 'float' - 'int' dönüşümü; veri kaybı olabilir
+C:\Users\Altanb\Desktop\proxy\proxy\events.cpp(474,21): warning C4244: 'başlatılıyor': 'float' - 'int' dönüşümü; veri kaybı olabilir
+C:\Users\Altanb\Desktop\proxy\proxy\events.cpp(475,21): warning C4244: 'başlatılıyor': 'float' - 'int' dönüşümü; veri kaybı olabilir
+C:\Users\Altanb\Desktop\proxy\proxy\events.cpp(493,21): warning C4244: 'başlatılıyor': 'float' - 'int' dönüşümü; veri kaybı olabilir
+C:\Users\Altanb\Desktop\proxy\proxy\events.cpp(494,21): warning C4244: 'başlatılıyor': 'float' - 'int' dönüşümü; veri kaybı olabilir
+C:\Users\Altanb\Desktop\proxy\proxy\events.cpp(745,25): warning C4244: 'başlatılıyor': 'float' - 'int' dönüşümü; veri kaybı olabilir
+C:\Users\Altanb\Desktop\proxy\proxy\events.cpp(746,25): warning C4244: 'başlatılıyor': 'float' - 'int' dönüşümü; veri kaybı olabilir
+C:\Users\Altanb\Desktop\proxy\proxy\events.cpp(866,52): warning C4244: '=': 'int' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\Altanb\Desktop\proxy\proxy\events.cpp(867,52): warning C4244: '=': 'int' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\Altanb\Desktop\proxy\proxy\events.cpp(881,52): warning C4244: '=': 'int' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\Altanb\Desktop\proxy\proxy\events.cpp(882,52): warning C4244: '=': 'int' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\Altanb\Desktop\proxy\proxy\events.cpp(913,52): warning C4244: '=': 'int' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\Altanb\Desktop\proxy\proxy\events.cpp(914,52): warning C4244: '=': 'int' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\Altanb\Desktop\proxy\proxy\events.cpp(962,25): warning C4244: 'başlatılıyor': 'float' - 'int' dönüşümü; veri kaybı olabilir
+C:\Users\Altanb\Desktop\proxy\proxy\events.cpp(963,25): warning C4244: 'başlatılıyor': 'float' - 'int' dönüşümü; veri kaybı olabilir
+C:\Users\Altanb\Desktop\proxy\proxy\events.cpp(1153,52): warning C4244: '=': 'int' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\Altanb\Desktop\proxy\proxy\events.cpp(1154,52): warning C4244: '=': 'int' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\Altanb\Desktop\proxy\proxy\events.cpp(1164,53): warning C4244: '=': 'int' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\Altanb\Desktop\proxy\proxy\events.cpp(1165,53): warning C4244: '=': 'int' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\Altanb\Desktop\proxy\proxy\events.cpp(1175,53): warning C4244: '=': 'int' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\Altanb\Desktop\proxy\proxy\events.cpp(1176,53): warning C4244: '=': 'int' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\Altanb\Desktop\proxy\proxy\events.cpp(1611,21): warning C4244: 'başlatılıyor': 'float' - 'int' dönüşümü; veri kaybı olabilir
+C:\Users\Altanb\Desktop\proxy\proxy\events.cpp(1612,21): warning C4244: 'başlatılıyor': 'float' - 'int' dönüşümü; veri kaybı olabilir
+C:\Users\Altanb\Desktop\proxy\proxy\events.cpp(1618,21): warning C4244: 'başlatılıyor': 'float' - 'int' dönüşümü; veri kaybı olabilir
+C:\Users\Altanb\Desktop\proxy\proxy\events.cpp(1619,21): warning C4244: 'başlatılıyor': 'float' - 'int' dönüşümü; veri kaybı olabilir
+C:\Users\Altanb\Desktop\proxy\proxy\events.cpp(1834,56): warning C4267: 'başlatılıyor': 'size_t' - 'int' dönüşümü; veri kaybı olabilir
+  server.cpp
+C:\Users\Altanb\Desktop\proxy\proxy\proton\variant.hpp(322,1): warning C4267: '=': 'size_t' - 'int' dönüşümü; veri kaybı olabilir
+C:\Users\Altanb\Desktop\proxy\proxy\proton\variant.hpp(339,1): warning C4267: '=': 'size_t' - 'int' dönüşümü; veri kaybı olabilir
+C:\Users\Altanb\Desktop\proxy\proxy\proton\variant.hpp(355,1): warning C4267: 'başlatılıyor': 'size_t' - 'uint32_t' dönüşümü; veri kaybı olabilir
+server.obj : error LNK2005: "bool events::out::fastdrop" (?fastdrop@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::backas" (?backas@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::saveworld" (?saveworld@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::dropwl" (?dropwl@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::player1boxy" (?player1boxy@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::fasttrash" (?fasttrash@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::kck" (?kck@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::bnn" (?bnn@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::player1boxx" (?player1boxx@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::xpos" (?xpos@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::daw" (?daw@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::bann" (?bann@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::pulas" (?pulas@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::dicespeed" (?dicespeed@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::dropbgl" (?dropbgl@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "int events::out::wlx" (?wlx@out@events@@3HA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::pallfal" (?pallfal@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::unaccesspaketi" (?unaccesspaketi@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::xyposition" (?xyposition@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::daws" (?daws@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "int events::out::wly" (?wly@out@events@@3HA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::taxsystem" (?taxsystem@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "int events::out::sety" (?sety@out@events@@3HA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::banbynames" (?banbynames@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::packets" (?packets@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::banas" (?banas@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::visdice" (?visdice@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "int events::out::loggedin" (?loggedin@out@events@@3HA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::currentmsg" (?currentmsg@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::autopullsayi" (?autopullsayi@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::speedas" (?speedas@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "int events::out::posy" (?posy@out@events@@3HA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::player2boxy" (?player2boxy@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::spam" (?spam@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::nid" (?nid@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::amx" (?amx@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::pullfal" (?pullfal@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::ip" (?ip@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::dawas" (?dawas@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "int events::out::ruletsayi" (?ruletsayi@out@events@@3HA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::player2y" (?player2y@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::cordinates" (?cordinates@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::take" (?take@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "int events::out::type2" (?type2@out@events@@3HA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::wrenchpull" (?wrenchpull@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::player2x" (?player2x@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::currentuid" (?currentuid@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::player1y" (?player1y@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "int events::out::id" (?id@out@events@@3HA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "int events::out::doorid" (?doorid@out@events@@3HA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::owneruid" (?owneruid@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::pulln" (?pulln@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::automsg" (?automsg@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::autohosts" (?autohosts@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "int events::out::aa" (?aa@out@events@@3HA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::type" (?type@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::allfal" (?allfal@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::dropdl" (?dropdl@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "int events::out::uidz" (?uidz@out@events@@3HA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::backas1" (?backas1@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::autoban" (?autoban@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::spam1" (?spam1@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::autoacc" (?autoacc@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::dicemod" (?dicemod@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::autoaccs" (?autoaccs@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::country" (?country@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "int events::out::posx" (?posx@out@events@@3HA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "int events::out::setx" (?setx@out@events@@3HA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::player2boxx" (?player2boxx@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "int events::out::yuzde" (?yuzde@out@events@@3HA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::pullbynames" (?pullbynames@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::spaminterval" (?spaminterval@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "int events::out::test" (?test@out@events@@3HA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::autopull" (?autopull@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::autounacc" (?autounacc@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::blinkas" (?blinkas@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::visualspin" (?visualspin@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::fastmmode" (?fastmmode@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::worldbanjoinmod" (?worldbanjoinmod@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::wltroll" (?wltroll@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::pll" (?pll@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::coloredtext" (?coloredtext@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::player1x" (?player1x@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::swx" (?swx@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::blind" (?blind@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::cdropcount" (?cdropcount@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::mode" (?mode@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "bool events::out::back" (?back@out@events@@3_NA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::lidb" (?lidb@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "int events::out::sayi" (?sayi@out@events@@3HA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "int events::out::iditemm" (?iditemm@out@events@@3HA) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::banfal" (?banfal@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::name" (?name@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::deneme" (?deneme@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+server.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > events::out::dc" (?dc@out@events@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A) zaten events.obj üzerinde tanımlandı
+C:\Users\Altanb\Desktop\proxy\x64\Release\proxy.exe : fatal error LNK1169: Bir veya daha fazla birden çok kez tanımlanmış sembol bulundu
