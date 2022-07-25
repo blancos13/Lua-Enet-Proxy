@@ -1,3 +1,4 @@
+#pragma once
 #include "server.h"
 #include <iostream>
 #include "events.h"
@@ -5,6 +6,101 @@
 #include "proton/hash.hpp"
 #include "proton/rtparam.hpp"
 #include "utils.h"
+#include "print.h"
+
+
+typedef unsigned char BYTE;
+int getState() {
+    int val = 0;
+    val |= gt::noclip ? 1 : 2;
+    return val;
+}
+
+struct PlayerMovings {
+    int packetType;
+    int netID;
+    float x;
+    float y;
+    int characterState;
+    int plantingTree;
+    float XSpeed;
+    float YSpeed;
+    int punchX;
+    int punchY;
+    int SecondaryNetID;
+};
+
+
+PlayerMovings* unpackRaw(BYTE* data) {
+    PlayerMovings* p = new PlayerMovings;
+    memcpy(&p->packetType, data, 4);
+    memcpy(&p->netID, data + 4, 4);
+    memcpy(&p->characterState, data + 12, 4);
+    memcpy(&p->plantingTree, data + 20, 4);
+    memcpy(&p->x, data + 24, 4);
+    memcpy(&p->y, data + 28, 4);
+    memcpy(&p->XSpeed, data + 32, 4);
+    memcpy(&p->YSpeed, data + 36, 4);
+    memcpy(&p->punchX, data + 44, 4);
+    memcpy(&p->punchY, data + 48, 4);
+    return p;
+}
+
+
+BYTE* packPlayerMovings(PlayerMovings* dataStruct) {
+    BYTE* data = new BYTE[56];
+    for (int i = 0; i < 56; i++) {
+        data[i] = 0;
+    }
+    memcpy(data, &dataStruct->packetType, 4);
+    memcpy(data + 4, &dataStruct->netID, 4);
+    memcpy(data + 8, &dataStruct->SecondaryNetID, 4);
+    memcpy(data + 12, &dataStruct->characterState, 4);
+    memcpy(data + 20, &dataStruct->plantingTree, 4);
+    memcpy(data + 24, &dataStruct->x, 4);
+    memcpy(data + 28, &dataStruct->y, 4);
+    memcpy(data + 32, &dataStruct->XSpeed, 4);
+    memcpy(data + 36, &dataStruct->YSpeed, 4);
+    memcpy(data + 44, &dataStruct->punchX, 4);
+    memcpy(data + 48, &dataStruct->punchY, 4);
+    return data;
+}
+
+void server::addBlock(int tile, int x, int y) {
+    PlayerMovings data;
+    data.packetType = 0x3;
+    data.characterState = 0x0; // animation
+    data.x = x;
+    data.y = y;
+    data.punchX = x;
+    data.punchY = y;
+    data.XSpeed = 0;
+    data.YSpeed = 0;
+    data.netID = g_server->m_world.local.netid;
+    data.plantingTree = tile;
+    g_server->SendPacketRaw(true, 4, packPlayerMovings(&data), 56, 0, ENET_PACKET_FLAG_RELIABLE);
+}
+
+
+void server::sendState(int netid) {
+    PlayerMovings data;
+    data.packetType = 0x14;
+    data.characterState = 0; // animation
+    data.x = 1000;
+    data.y = 100;
+    data.punchX = 500;
+    data.punchY = 0;
+    data.XSpeed = 2000;
+    data.YSpeed = 500;
+    data.netID = netid;
+    data.plantingTree = getState();
+    BYTE* raw = packPlayerMovings(&data);
+    int var = 0x808000;
+    float water = 125.0f;
+    memcpy(raw + 1, &var, 3);
+    memcpy(raw + 16, &water, 4);
+    g_server->SendPacketRaw(true, 4, raw, 56, 0, ENET_PACKET_FLAG_RELIABLE);
+}
 
 void server::handle_outgoing() {
     ENetEvent evt;
@@ -12,81 +108,83 @@ void server::handle_outgoing() {
         m_gt_peer = evt.peer;
 
         switch (evt.type) {
-            case ENET_EVENT_TYPE_CONNECT: {
-                if (!this->connect())
-                    return;
-            } break;
-            case ENET_EVENT_TYPE_RECEIVE: {
-                int packet_type = get_packet_type(evt.packet);
-                switch (packet_type) {
-                    case NET_MESSAGE_GENERIC_TEXT:
-                        if (events::out::generictext(utils::get_text(evt.packet))) {
-                            enet_packet_destroy(evt.packet);
-                            return;
-                        }
-                        break;
-                    case NET_MESSAGE_GAME_MESSAGE:
-                        if (events::out::gamemessage(utils::get_text(evt.packet))) {
-                            enet_packet_destroy(evt.packet);
-                            return;
-                        }
-                        break;
-                    case NET_MESSAGE_GAME_PACKET: {
-                        auto packet = utils::get_struct(evt.packet);
-                        if (!packet)
-                            break;
-
-                        switch (packet->m_type) {
-                            case PACKET_STATE:
-                                if (events::out::state(packet)) {
-                                    enet_packet_destroy(evt.packet);
-                                    return;
-                                }
-                                break;
-                            case PACKET_CALL_FUNCTION:
-                                if (events::out::variantlist(packet)) {
-                                    enet_packet_destroy(evt.packet);
-                                    return;
-                                }
-                                break;
-
-                            case PACKET_PING_REPLY:
-                                if (events::out::pingreply(packet)) {
-                                    enet_packet_destroy(evt.packet);
-                                    return;
-                                }
-                                break;
-                            case PACKET_DISCONNECT:
-                            case PACKET_APP_INTEGRITY_FAIL:
-                                if (gt::in_game)
-                                    return;
-                                break;
-
-                            default: PRINTS("gamepacket type: %d\n", packet->m_type);
-                        }
-                    } break;
-                    case NET_MESSAGE_TRACK: //track one should never be used, but its not bad to have it in case.
-                    case NET_MESSAGE_CLIENT_LOG_RESPONSE: return;
-
-                    default: PRINTS("Got unknown packet of type %d.\n", packet_type); break;
-                }
-
-                if (!m_server_peer || !m_real_server)
-                    return;
-                enet_peer_send(m_server_peer, 0, evt.packet);
-                enet_host_flush(m_real_server);
-            } break;
-            case ENET_EVENT_TYPE_DISCONNECT: {
-                if (gt::in_game)
-                    return;
-                if (gt::connecting) {
-                    this->disconnect(false);
-                    gt::connecting = false;
+        case ENET_EVENT_TYPE_CONNECT: {
+            if (!this->connect())
+                return;
+        } break;
+        case ENET_EVENT_TYPE_RECEIVE: {
+            int packet_type = get_packet_type(evt.packet);
+            switch (packet_type) {
+            case NET_MESSAGE_GENERIC_TEXT:
+                if (events::out::generictext(utils::get_text(evt.packet))) {
+                    enet_packet_destroy(evt.packet);
                     return;
                 }
+                break;
+            case NET_MESSAGE_GAME_MESSAGE:
+                if (events::out::gamemessage(utils::get_text(evt.packet))) {
+                    enet_packet_destroy(evt.packet);
+                    return;
+                }
+                break;
+            case NET_MESSAGE_GAME_PACKET: {
+                auto packet = utils::get_struct(evt.packet);
+                if (!packet)
+                    break;
 
+                switch (packet->m_type) {
+                case PACKET_STATE:
+                    if (events::out::state(packet)) {
+                        enet_packet_destroy(evt.packet);
+                        return;
+                    }
+                    break;
+                case PACKET_CALL_FUNCTION:
+                    if (events::out::variantlist(packet)) {
+                        enet_packet_destroy(evt.packet);
+                        return;
+                    }
+                    break;
+
+                case PACKET_PING_REPLY:
+                    if (events::out::pingreply(packet)) {
+                        enet_packet_destroy(evt.packet);
+                        return;
+                    }
+                    break;
+                case PACKET_DISCONNECT:
+                case PACKET_APP_INTEGRITY_FAIL:
+                    if (gt::in_game)
+                        return;
+                    break;
+
+                default: PRINTS("gamepacket type: %d\n", packet->m_type);
+
+
+                }
             } break;
-            default: PRINTS("UNHANDLED\n"); break;
+            case NET_MESSAGE_TRACK: //track one should never be used, but its not bad to have it in case.
+            case NET_MESSAGE_CLIENT_LOG_RESPONSE: return;
+
+            default: PRINTS("Got unknown packet of type %d.\n", packet_type); break;
+            }
+
+            if (!m_server_peer || !m_real_server)
+                return;
+            enet_peer_send(m_server_peer, 0, evt.packet);
+            enet_host_flush(m_real_server);
+        } break;
+        case ENET_EVENT_TYPE_DISCONNECT: {
+            if (gt::in_game)
+                return;
+            if (gt::connecting) {
+                this->disconnect(false);
+                gt::connecting = false;
+                return;
+            }
+
+        } break;
+        default: PRINTS("UNHANDLED\n"); break;
         }
     }
 }
@@ -97,93 +195,143 @@ void server::handle_incoming() {
 
     while (enet_host_service(m_real_server, &event, 0) > 0) {
         switch (event.type) {
-            case ENET_EVENT_TYPE_CONNECT: PRINTC("connection event\n"); break;
-            case ENET_EVENT_TYPE_DISCONNECT: this->disconnect(true); return;
-            case ENET_EVENT_TYPE_RECEIVE: {
-                if (event.packet->data) {
-                    int packet_type = get_packet_type(event.packet);
-                    switch (packet_type) {
-                        case NET_MESSAGE_GENERIC_TEXT:
-                            if (events::in::generictext(utils::get_text(event.packet))) {
-                                enet_packet_destroy(event.packet);
-                                return;
-                            }
-                            break;
-                        case NET_MESSAGE_GAME_MESSAGE:
-                            if (events::in::gamemessage(utils::get_text(event.packet))) {
-                                enet_packet_destroy(event.packet);
-                                return;
-                            }
-                            break;
-                        case NET_MESSAGE_GAME_PACKET: {
-                            auto packet = utils::get_struct(event.packet);
-                            if (!packet)
-                                break;
-
-                            switch (packet->m_type) {
-                    case PACKET_SEND_INVENTORY_STATE: {
-                        server::inventory.clear();
-                        auto extended_ptr = utils::get_extended(packet);
-                        inventory.resize(*reinterpret_cast<short*>(extended_ptr + 9));
-                        memcpy(inventory.data(), extended_ptr + 11, server::inventory.capacity() * sizeof(Item));
-                        //for (Item& item : inventory) {
-                        //    std::cout << "Id: "<< (int)item.id << std::endl;
-                        //    std::cout << "Count: "<< (int)item.count << std::endl;
-                        //    std::cout << "type: "<< (int)item.type << std::endl;
-                        //}
-                    }break;                                    
-                    case 8: {
-                        if (!packet->m_int_data) {
-                            std::string dice_roll = std::to_string(packet->m_count + 1);
-                            gt::send_log("`bThe dice `bwill roll a `#" + dice_roll);
-                        }
-                    }break;                                    
-                                case PACKET_CALL_FUNCTION:
-                                    if (events::in::variantlist(packet)) {
-                                        enet_packet_destroy(event.packet);
-                                        return;
-                                    }
-                                    break;
-
-                                case PACKET_SEND_MAP_DATA:
-                                    if (events::in::sendmapdata(packet)) {
-                                        enet_packet_destroy(event.packet);
-                                        return;
-                                    }
-                                    break;
-
-                                case PACKET_STATE:
-                                    if (events::in::state(packet)) {
-                                        enet_packet_destroy(event.packet);
-                                        return;
-                                    }
-                                    break;
-                                //no need to print this for handled packet types such as func call, because we know its 1
-                                default: PRINTC("gamepacket type: %d\n", packet->m_type); break;
-                            }
-                        } break;
-
-                        //ignore tracking packet, and request of client crash log
-                        case NET_MESSAGE_TRACK:
-                            if (events::in::tracking(utils::get_text(event.packet))) {
-                                enet_packet_destroy(event.packet);
-                                return;
-                            }
-                            break;
-                        case NET_MESSAGE_CLIENT_LOG_REQUEST: return;
-
-                        default: PRINTS("Got unknown packet of type %d.\n", packet_type); break;
+        case ENET_EVENT_TYPE_CONNECT: PRINTC("connection event\n"); break;
+        case ENET_EVENT_TYPE_DISCONNECT: this->disconnect(true); return;
+        case ENET_EVENT_TYPE_RECEIVE: {
+            if (event.packet->data) {
+                int packet_type = get_packet_type(event.packet);
+                switch (packet_type) {
+                case NET_MESSAGE_GENERIC_TEXT:
+                    if (events::in::generictext(utils::get_text(event.packet))) {
+                        enet_packet_destroy(event.packet);
+                        return;
                     }
+                    break;
+                case NET_MESSAGE_GAME_MESSAGE:
+                    if (events::in::gamemessage(utils::get_text(event.packet))) {
+                        enet_packet_destroy(event.packet);
+                        return;
+                    }
+                    break;
+                case NET_MESSAGE_GAME_PACKET: {
+                    auto packet = utils::get_struct(event.packet);
+                    if (!packet)
+                        break;
+
+                    switch (packet->m_type) {
+                    case 3: {
+                        auto lalal = utils::GetStructPointerFromTankPacket(event.packet);
+                        PlayerMovings* data = unpackRaw(utils::GetStructPointerFromTankPacket(event.packet));
+                        if (gt::placetp) {
+                            int punchx;
+                            int punchy;
+                            memcpy(&punchx, lalal + 44, 4);
+                            memcpy(&punchy, lalal + 48, 4);
+                            gt::placex = punchx;
+                            gt::placey = punchy;
+                            g_server->m_world.local.pos.m_x = punchx * 32;
+                            g_server->m_world.local.pos.m_y = punchy * 32;
+                            variantlist_t lost{ "OnSetPos" };
+                            lost[1] = g_server->m_world.local.pos;
+                            g_server->send(true, lost, g_server->m_world.local.netid, -1);
+                            break;
+                        }
+                        else if (gt::devmode) {
+                            if (data->plantingTree != 18 || data->plantingTree != 32) {
+                                g_server->addBlock(data->plantingTree, data->punchX, data->punchY);
+                                break;
+                            }
+                        }
+                    }
+                   case 8: {
+                        if (!packet->m_int_data) {
+                            if (events::out::dicespeed == true)
+                            {
+                                try
+                                {
+                                    std::string dice_roll = std::to_string(packet->m_count + 1);
+                                    gt::send_log("`bThe dice `bwill roll a `#" + dice_roll);
+                                }
+                                catch (int a)
+                                {
+                                    gt::send_log("`bDice Error");
+
+                                }
+                            }
+                            if (events::out::visdice == true)
+                            {
+                                try
+                                {
+                                    packet->m_count = events::out::sayi;
+                                }
+                                catch(int a)
+                                {
+                                   
+                                }
+                            }
+
+                        }
+                    }break;
+
+                    case PACKET_PING_REQUEST: {
+                        //thanks to wh1ter0se
+                        gameupdatepacket_t pkt = {};
+                        pkt.m_type = PACKET_PING_REPLY;
+                        pkt.m_int_data = packet->m_int_data;
+                        pkt.m_vec_x = 64.f;
+                        pkt.m_vec_y = 64.f;
+                        pkt.m_vec2_x = 1000.f;
+                        pkt.m_vec2_y = 250.f;
+                        g_server->send(true, NET_MESSAGE_GAME_PACKET, (uint8_t*)&pkt, sizeof(gameupdatepacket_t));
+                        gt::send_log("`b[`#S`b]:Ping reply was successfully `2sent!`b(Saved you from a DC or a possible ban)");
+                    } break;
+                    case PACKET_CALL_FUNCTION:
+                        if (events::in::variantlist(packet)) {
+                            enet_packet_destroy(event.packet);
+                            return;
+                        }
+                        break;
+
+                    case PACKET_SEND_MAP_DATA:
+                        if (events::in::sendmapdata(packet)) {
+                            enet_packet_destroy(event.packet);
+                            return;
+                        }
+                        break;
+                    case PACKET_STATE:
+                        if (events::in::state(packet)) {
+                            enet_packet_destroy(event.packet);
+                            return;
+                        }
+                        break;
+                        //no need to print this for handled packet types such as func call, because we know its 1
+                    default: PRINTC("gamepacket type: %d\n", packet->m_type);
+                        break;
+                    }
+                } break;
+                    
+                    //ignore tracking packet, and request of client crash log
+                case NET_MESSAGE_TRACK:
+
+                    if (events::in::tracking(utils::get_text(event.packet))) {
+                        enet_packet_destroy(event.packet);
+                        return;
+                    }
+                    break;
+                case NET_MESSAGE_CLIENT_LOG_REQUEST: return;
+
+                default: PRINTS("Got unknown packet of type %d.\n", packet_type); break;
                 }
+            }
 
-                if (!m_gt_peer || !m_proxy_server)
-                    return;
-                enet_peer_send(m_gt_peer, 0, event.packet);
-                enet_host_flush(m_proxy_server);
+            if (!m_gt_peer || !m_proxy_server)
+                return;
+            enet_peer_send(m_gt_peer, 0, event.packet);
+            enet_host_flush(m_proxy_server);
 
-            } break;
+        } break;
 
-            default: PRINTC("UNKNOWN event: %d\n", event.type); break;
+        default: PRINTC("UNKNOWN event: %d\n", event.type); break;
         }
     }
 }
@@ -201,7 +349,7 @@ void server::poll() {
 
 bool server::start() {
     ENetAddress address;
-    enet_address_set_host(&address, "0.0.0.0");
+    enet_address_set_host(&address, create.c_str());
     address.port = m_proxyport;
     m_proxy_server = enet_host_create(&address, 1024, 10, 0, 0);
     m_proxy_server->usingNewPacket = false;
@@ -244,12 +392,12 @@ void server::redirect_server(variantlist_t& varlist) {
     m_token = varlist[2].get_uint32();
     m_user = varlist[3].get_uint32();
     auto str = varlist[4].get_string();
-   
+
     auto doorid = str.substr(str.find("|"));
     m_server = str.erase(str.find("|")); //remove | and doorid from end
     PRINTC("port: %d token %d user %d server %s doorid %s\n", m_port, m_token, m_user, m_server.c_str(), doorid.c_str());
     varlist[1] = m_proxyport;
-    varlist[4] = "127.0.0.1" + doorid;
+    varlist[4] = ipserver + doorid;
 
     gt::connecting = true;
     send(true, varlist);
@@ -272,12 +420,29 @@ void server::disconnect(bool reset) {
     if (reset) {
         m_user = 0;
         m_token = 0;
-        m_server = "213.179.209.168";
-        m_port = 17198;
+        m_server = serverz;
+        m_port = portz;
     }
 }
-
+void server::disconnectsr(bool reset) {
+    m_world.connected = false;
+    m_world.local = {};
+    m_world.players.clear();
+    if (m_server_peer) {
+        enet_peer_disconnect(m_server_peer, 0);
+        m_server_peer = nullptr;
+        enet_host_destroy(m_real_server);
+        m_real_server = nullptr;
+    }
+    if (reset) {
+        m_user = 0;
+        m_token = 0;
+        m_server = serverz;
+        m_port = portz;
+    }
+}
 bool server::connect() {
+    print::set_color(LightGreen);
     PRINTS("Connecting to server.\n");
     ENetAddress address;
     enet_address_set_host(&address, m_server.c_str());
@@ -351,7 +516,30 @@ void server::send(bool client, variantlist_t& list, int32_t netid, int32_t delay
     enet_host_flush(host);
     free(game_packet);
 }
+void SendPacketRaw(int a1, void* packetData, size_t packetDataSize, void* a4, ENetPeer* peer, int packetFlag)
+{
+    ENetPacket* p;
 
+    if (peer) // check if we have it setup
+    {
+        if (a1 == 4 && *((BYTE*)packetData + 12) & 8)
+        {
+            p = enet_packet_create(0, packetDataSize + *((DWORD*)packetData + 13) + 5, packetFlag);
+            int four = 4;
+            memcpy(p->data, &four, 4);
+            memcpy((char*)p->data + 4, packetData, packetDataSize);
+            memcpy((char*)p->data + packetDataSize + 4, a4, *((DWORD*)packetData + 13));
+            enet_peer_send(peer, 0, p);
+        }
+        else
+        {
+            p = enet_packet_create(0, packetDataSize + 5, packetFlag);
+            memcpy(p->data, &a1, 4);
+            memcpy((char*)p->data + 4, packetData, packetDataSize);
+            enet_peer_send(peer, 0, p);
+        }
+    }
+}
 //bool client: true - sends to growtopia client    false - sends to gt server
 void server::send(bool client, std::string text, int32_t type) {
     auto peer = client ? m_gt_peer : m_server_peer;
@@ -369,4 +557,26 @@ void server::send(bool client, std::string text, int32_t type) {
     if (code != 0)
         PRINTS("Error sending packet! code: %d\n", code);
     enet_host_flush(host);
+}
+
+void server::SendPacketRaw(bool client, int a1, void* packetData, size_t packetDataSize, void* a4, int packetFlag) {
+    ENetPacket* p;
+    auto peer = client ? m_gt_peer : m_server_peer;
+    if (peer) {
+        if (a1 == 4 && *((BYTE*)packetData + 12) & 8) {
+            p = enet_packet_create(0, packetDataSize + *((DWORD*)packetData + 13) + 5, packetFlag);
+            int four = 4;
+            memcpy(p->data, &four, 4);
+            memcpy((char*)p->data + 4, packetData, packetDataSize);
+            memcpy((char*)p->data + packetDataSize + 4, a4, *((DWORD*)packetData + 13));
+            enet_peer_send(peer, 0, p);
+        }
+        else {
+            p = enet_packet_create(0, packetDataSize + 5, packetFlag);
+            memcpy(p->data, &a1, 4);
+            memcpy((char*)p->data + 4, packetData, packetDataSize);
+            enet_peer_send(peer, 0, p);
+        }
+    }
+    delete (char*)packetData;
 }
